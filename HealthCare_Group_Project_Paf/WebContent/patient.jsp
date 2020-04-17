@@ -13,5 +13,7 @@
 
 <p><a href= "PatientService/doctor">Doctor</a>
 
+<p><a href="PatientService/Appointments">Appointment</a>
+
 </body>
 </html>

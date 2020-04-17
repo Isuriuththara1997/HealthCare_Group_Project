@@ -22,7 +22,7 @@ public class PaymentDetailsService {
 
 	// method to read the appointment details alone with the amount
 	@GET
-	@Path("/amountnew")
+	@Path("/amount")
 	@Produces(MediaType.TEXT_HTML)
 	public String readAppointmentDetails() {
 		return PayObj.readAppointmentDetails();

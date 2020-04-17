@@ -91,6 +91,7 @@ public class PaymentDetailsService {
 		String id = doc.select("id").text();
 		String output = PayObj.deletePaymentDetails(id);
 		return output;
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import Util.DB_Connection;
 
 public class PaymentDetails {
 
+	
 	// insert new payment details
 	public String insertPaymentDetails(String appno, String ctype, String name, String add, String pho, String expdate,
 			String amount, String status) {

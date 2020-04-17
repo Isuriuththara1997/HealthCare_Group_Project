@@ -6,12 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import Util.DB_Connection;
-
 public class Patient {
 	// A common method to connect to the DB
-		/*private Connection connect() {
+	/*	private Connection connect() {
 			Connection con = null;
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -22,15 +20,15 @@ public class Patient {
 				e.printStackTrace();
 			}
 			return con;
-		}*/
-
+		}
+*/
 		public String insertPatient(String pName, String pAddress, String pAge, String pEmail, String pPhone, String pNIC) {
 			String output = "";
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
 				if (con == null) {
-					return "Error while connecting to the database for inserting patient details.";
+					return "Error while connecting to the database for inserting.";
 				}
 				// create a prepared statement
 				String query = " insert into patient(`patientID`,`patientName`,`patientAddress`,`patientAge`,`patientEmail`,`patientPhone`,`patientNIC`)"
@@ -60,8 +58,9 @@ public class Patient {
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
+				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for reading patient details.";
+					return "Error while connecting to the database for reading.";
 				}
 				// Prepare the html table to be displayed
 				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Update Patient</th><th>Remove Patient</th></tr>";
@@ -105,8 +104,9 @@ public class Patient {
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
+				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for updating patient details.";
+					return "Error while connecting to the database for updating.";
 				}
 				// create a prepared statement
 				String query = "UPDATE patient SET patientName=?,patientAddress=?,patientAge=?,patientEmail=?,patientPhone=?,patientNIC=? WHERE patientID=?";
@@ -136,8 +136,9 @@ public class Patient {
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
+				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for deleting patient details.";
+					return "Error while connecting to the database for deleting.";
 				}
 				// create a prepared statement
 				String query = "delete from patient where patientID=?";

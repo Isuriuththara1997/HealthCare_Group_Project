@@ -27,7 +27,7 @@ public class Patient {
 			try {
 				Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for inserting.";
+					return "Error while connecting to the database for inserting patient details.";
 				}
 				// create a prepared statement
 				String query = " insert into patient(`patientID`,`patientName`,`patientAddress`,`patientAge`,`patientEmail`,`patientPhone`,`patientNIC`)"
@@ -57,7 +57,7 @@ public class Patient {
 			try {
 				Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for reading.";
+					return "Error while connecting to the database for reading patient details.";
 				}
 				// Prepare the html table to be displayed
 				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Update Patient</th><th>Remove Patient</th></tr>";
@@ -101,7 +101,7 @@ public class Patient {
 			try {
 				Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for updating.";
+					return "Error while connecting to the database for updating patient details.";
 				}
 				// create a prepared statement
 				String query = "UPDATE patient SET patientName=?,patientAddress=?,patientAge=?,patientEmail=?,patientPhone=?,patientNIC=? WHERE patientID=?";
@@ -131,7 +131,7 @@ public class Patient {
 			try {
 				Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for deleting.";
+					return "Error while connecting to the database for deleting patient details.";
 				}
 				// create a prepared statement
 				String query = "delete from patient where patientID=?";

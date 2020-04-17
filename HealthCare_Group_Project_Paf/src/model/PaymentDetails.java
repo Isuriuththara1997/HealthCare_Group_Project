@@ -10,8 +10,8 @@ public class PaymentDetails {
 			String amount, String status) {
 		String output = "";
 		try {
-			DB_Connection con = new DB_Connection();
-			Connection conn = con.connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 
 			if (con == null) {
 				return "Error while connecting to the database for inserting.";
@@ -19,7 +19,7 @@ public class PaymentDetails {
 			// create a prepared statement
 			String query = " insert into paymentdetails (`id`,`appno`,`cardType`,`nameOnCard`,`address`,`phone`,`expdate`,`amount`)"
 					+ " values (?,?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setInt(1, 0);
 			preparedStmt.setString(2, appno);
@@ -33,7 +33,7 @@ public class PaymentDetails {
 
 			// execute the statement
 			preparedStmt.execute();
-			conn.close();
+			con.close();
 			output = "Inserted successfully";
 		} catch (Exception e) {
 			output = "Error while inserting the card details.";
@@ -46,15 +46,15 @@ public class PaymentDetails {
 	public String readPaymentDetails() {
 		String output = "";
 		try {
-			DB_Connection con = new DB_Connection();
-			Connection conn = con.connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
 			output = "<table border=\"1\"><tr> <th>AppoID</th> <th>CarsType</th> <th>Name</th> <th>Address</th> <th>Phone</th ><th>Exp_date</th> <th>Amount</th> <th>Status</th> </tr>";
 			String query = "select * from paymentdetails";
-			Statement stmt = conn.createStatement();
+			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			// iterate through the rows in the result set
 			while (rs.next()) {
@@ -78,7 +78,7 @@ public class PaymentDetails {
 				output += "<td>" + status + "</td>";
 
 			}
-			conn.close();
+			con.close();
 			// Complete the html table
 			output += "</table>";
 		} catch (Exception e) {
@@ -93,14 +93,14 @@ public class PaymentDetails {
 			String expdate, String amount, String status) {
 		String output = "";
 		try {
-			DB_Connection con = new DB_Connection();
-			Connection conn = con.connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
 			String query = "UPDATE paymentdetails SET appno=?,cardType=?,nameOnCard=?,address=?,phone=?,expdate=?,amount=?,status=? WHERE id=?";
-			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, appno);
 			preparedStmt.setString(2, ctype);
@@ -114,7 +114,7 @@ public class PaymentDetails {
 
 			// execute the statement
 			preparedStmt.execute();
-			conn.close();
+			con.close();
 			output = "Updated successfully";
 		} catch (Exception e) {
 			output = "Error while updating the card details.";
@@ -127,19 +127,19 @@ public class PaymentDetails {
 	public String deletePaymentDetails(String id) {
 		String output = "";
 		try {
-			DB_Connection con = new DB_Connection();
-			Connection conn = con.connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
 			// create a prepared statement
 			String query = "delete from paymentdetails where id=?";
-			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setInt(1, Integer.parseInt(id));
 			// execute the statement
 			preparedStmt.execute();
-			conn.close();
+			con.close();
 			output = "Deleted successfully";
 		} catch (Exception e) {
 			output = "Error while deleting the card details.";
@@ -152,15 +152,15 @@ public class PaymentDetails {
 	public String readAppointmentDetails() {
 		String output = "";
 		try {
-			DB_Connection con = new DB_Connection();
-			Connection conn = con.connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
 			output = "<table border=\"1\"><tr> <th>AppoID</th> <th>date</th> <th>Name</th> <th>doctor id</th> <th>doc fee</th ><th>hospital fee</th>  <th>total</th></tr>";
 			String query = "select a.apno,a.date,a.patient,a.doctor,d.fee  from doctor d,appointment a where a.doctor= d.did ";
-			Statement stmt = conn.createStatement();
+			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			// iterate through the rows in the result set
 			while (rs.next()) {
@@ -180,7 +180,7 @@ public class PaymentDetails {
 				output += "<td>" + "doctorfee+hospitalfee" + "</td>";
 
 			}
-			conn.close();
+			con.close();
 			// Complete the html table
 			output += "</table>";
 		} catch (Exception e) {

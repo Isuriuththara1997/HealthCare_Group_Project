@@ -7,9 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import Util.DB_Connection;
+
 public class Patient {
 	// A common method to connect to the DB
-		private Connection connect() {
+		/*private Connection connect() {
 			Connection con = null;
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -20,12 +22,13 @@ public class Patient {
 				e.printStackTrace();
 			}
 			return con;
-		}
+		}*/
 
 		public String insertPatient(String pName, String pAddress, String pAge, String pEmail, String pPhone, String pNIC) {
 			String output = "";
 			try {
-				Connection con = connect();
+				DB_Connection DB = new DB_Connection();
+				Connection con = DB.connect();
 				if (con == null) {
 					return "Error while connecting to the database for inserting patient details.";
 				}
@@ -55,7 +58,8 @@ public class Patient {
 		public String readPatient() {
 			String output = "";
 			try {
-				Connection con = connect();
+				DB_Connection DB = new DB_Connection();
+				Connection con = DB.connect();
 				if (con == null) {
 					return "Error while connecting to the database for reading patient details.";
 				}
@@ -99,7 +103,8 @@ public class Patient {
 		public String updatePatient(String pID, String pName, String pAddress, String pAge, String pEmail, String pPhone, String pNIC) {
 			String output = "";
 			try {
-				Connection con = connect();
+				DB_Connection DB = new DB_Connection();
+				Connection con = DB.connect();
 				if (con == null) {
 					return "Error while connecting to the database for updating patient details.";
 				}
@@ -129,7 +134,8 @@ public class Patient {
 		public String deletePatient(String pID) {
 			String output = "";
 			try {
-				Connection con = connect();
+				DB_Connection DB = new DB_Connection();
+				Connection con = DB.connect();
 				if (con == null) {
 					return "Error while connecting to the database for deleting patient details.";
 				}

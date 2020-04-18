@@ -43,7 +43,7 @@ public class PaymentDetailsService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertPaymentDetails(@FormParam("appno") String appno, @FormParam("cardType") String cardType,
-			@FormParam("nameOnCard") String nameOnCard, @FormParam("address") String address,
+			@FormParam("nameOnCard") String nameOnCard, @FormParam("cardno") String address,
 			@FormParam("phone") String phone, @FormParam("expdate") String expdate, @FormParam("amount") String amount,
 			@FormParam("status") String status) {
 		String output = PayObj.insertPaymentDetails(appno, cardType, nameOnCard, address, phone, expdate, amount,

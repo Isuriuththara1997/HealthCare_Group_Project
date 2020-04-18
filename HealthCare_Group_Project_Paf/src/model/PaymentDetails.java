@@ -18,7 +18,7 @@ public class PaymentDetails {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into paymentdetails (`id`,`appno`,`cardType`,`nameOnCard`,`address`,`phone`,`expdate`,`amount`)"
+			String query = " insert into paymentdetails (`id`,`appno`,`cardType`,`nameOnCard`,`cardno`,`phone`,`expdate`,`amount`)"
 					+ " values (?,?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values

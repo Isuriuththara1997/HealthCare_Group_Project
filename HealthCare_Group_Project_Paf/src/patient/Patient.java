@@ -68,7 +68,7 @@ public class Patient {
 				// Prepare the html table to be displayed
 				//payment id is a foreign key. Retrieve payment status from payment table
 				
-				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Patient Condition</th><th>Payment Status</th><th>Update Patient</th><th>Remove Patient</th></tr>";
+				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Patient Condition</th><th>Payment Status</th>";
 				String query = "select p.patientID,p.patientName,p.patientAddress,p.patientAge,p.patientEmail,p.patientPhone,p.patientNIC,p.patientCondition,pay.status from patient p LEFT JOIN paymentdetails pay ON p.patientID=pay.id";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
@@ -93,11 +93,14 @@ public class Patient {
 					output += "<td>" + patientcondition + "</td>";
 					output += "<td>" + paymentstatus + "</td>";
 					// buttons
+					/*
 					output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update Patient\" class=\"btn btn-secondary\"></td>"
 							+ "<td><form method=\"post\" action=\"patients.jsp\">"
 							+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove Patient\" class=\"btn btn-danger\">"
 							+ "<input name=\"patientID\" type=\"hidden\" value=\"" + patientID + "\">" + "</form></td></tr>";
+			*/
 				}
+			
 				con.close();
 				// Complete the html table
 				output += "</table>";

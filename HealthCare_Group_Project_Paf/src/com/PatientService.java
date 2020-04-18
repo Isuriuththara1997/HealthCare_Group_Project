@@ -67,13 +67,13 @@ public class PatientService {
 		@Path("/payment")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.TEXT_PLAIN)
-		public String updatePatientCondition(String paymentData) {
+		public String updatePatientCondition(String payData) {
 			// Convert the input string to a JSON object
-			JsonObject doctorObject = new JsonParser().parse(paymentData).getAsJsonObject();
+			JsonObject patienObject = new JsonParser().parse(payData).getAsJsonObject();
 
 			// Read the values from the JSON object
-			String id = doctorObject.get("id").getAsString();
-			String status = doctorObject.get("status").getAsString();
+			String id = patienObject.get("id").getAsString();
+			String status = patienObject.get("status").getAsString();
 		
 
 			String output =  patientObj.updatePaymentStatus(id,status);

@@ -42,11 +42,11 @@ public class PaymentDetailsService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String insertPaymentDetails(@FormParam("appno") String appno, @FormParam("cardType") String cardType,
-			@FormParam("nameOnCard") String nameOnCard, @FormParam("cardno") String address,
+	public String insertPaymentDetails(@FormParam("app_Id") String app_Id, @FormParam("cardType") String cardType,
+			@FormParam("nameOnCard") String nameOnCard, @FormParam("cardno") String cardno,
 			@FormParam("phone") String phone, @FormParam("expdate") String expdate, @FormParam("amount") String amount,
 			@FormParam("status") String status) {
-		String output = PayObj.insertPaymentDetails(appno, cardType, nameOnCard, address, phone, expdate, amount,
+		String output = PayObj.insertPaymentDetails(app_Id, cardType, nameOnCard, cardno, phone, expdate, amount,
 				status);
 		return output;
 	}
@@ -63,16 +63,16 @@ public class PaymentDetailsService {
 
 //Read the values from the JSON object
 		String id = PaymentObj.get("id").getAsString();
-		String appno = PaymentObj.get("appno").getAsString();
+		String app_Id = PaymentObj.get("app_Id").getAsString();
 		String cardType = PaymentObj.get("cardType").getAsString();
 		String nameOnCard = PaymentObj.get("nameOnCard").getAsString();
-		String address = PaymentObj.get("address").getAsString();
+		String cardno = PaymentObj.get("cardno").getAsString();
 		String phone = PaymentObj.get("phone").getAsString();
 		String expdate = PaymentObj.get("expdate").getAsString();
 		String amount = PaymentObj.get("amount").getAsString();
 		String status = PaymentObj.get("status").getAsString();
 
-		String output = PayObj.updatePaymentDetails(id, appno, cardType, nameOnCard, address, phone, expdate, amount,
+		String output = PayObj.updatePaymentDetails(id, app_Id, cardType, nameOnCard, cardno, phone, expdate, amount,
 				status);
 		return output;
 	}
@@ -91,7 +91,6 @@ public class PaymentDetailsService {
 		String id = doc.select("id").text();
 		String output = PayObj.deletePaymentDetails(id);
 		return output;
-		
 	}
 
 }

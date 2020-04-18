@@ -65,10 +65,7 @@ public class appointment {
 				output += "<td>" + docId + "</td>";
 				output += "<td>" + patientId + "</td>";
 				// buttons
-				output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update Appoinment\" class=\"btn btn-secondary\"></td>"
-						+ "<td><form method=\"post\" action=\"patients.jsp\">"
-						+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove Appoinment\" class=\"btn btn-danger\">"
-						+ "<input name=\"patientID\" type=\"hidden\" value=\"" + appId + "\">" + "</form></td></tr>";
+
 			}
 			output += "</table>";
 		} catch (Exception e) {

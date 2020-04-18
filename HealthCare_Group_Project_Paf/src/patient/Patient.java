@@ -22,6 +22,7 @@ public class Patient {
 			}
 			return con;
 		}*/
+	
 
 		public String insertPatient(String pName, String pAddress, String pAge, String pEmail, String pPhone, String pNIC) {
 			String output = "";

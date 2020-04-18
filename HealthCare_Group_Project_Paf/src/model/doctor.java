@@ -12,16 +12,7 @@ import Util.DB_Connection;
 public class doctor {
 	
 	
-	
-	
-	
-	
-	
 
-		
-	
-	
-	
 	//Insert doctor details into doctor table
 	// Insert
 	public String insertDoctor( String name, String specialization, String nic, String mobile, String email, String doctorFee) {
@@ -264,7 +255,4 @@ public class doctor {
 			return output;
 		}
 		
-		
-		
-
-}
+	

@@ -126,7 +126,3 @@ public class doctorService {
 		return output;
 	}
 
-	
-	
-	
-}

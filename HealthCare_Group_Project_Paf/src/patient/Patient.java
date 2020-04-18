@@ -6,29 +6,30 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import Util.DB_Connection;
+
 public class Patient {
 	// A common method to connect to the DB
-	/*	private Connection connect() {
+		/*private Connection connect() {
 			Connection con = null;
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-
 				// Provide the correct details: DBServer/DBName, username, password
 				con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/helthcare", "root", "root");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return con;
-		}
-*/
+		}*/
+
 		public String insertPatient(String pName, String pAddress, String pAge, String pEmail, String pPhone, String pNIC) {
 			String output = "";
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
 				if (con == null) {
-					return "Error while connecting to the database for inserting.";
+					return "Error while connecting to the database for inserting patient details.";
 				}
 				// create a prepared statement
 				String query = " insert into patient(`patientID`,`patientName`,`patientAddress`,`patientAge`,`patientEmail`,`patientPhone`,`patientNIC`)"
@@ -58,13 +59,16 @@ public class Patient {
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
-				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for reading.";
+					return "Error while connecting to the database for reading patient details.";
 				}
+
+				
 				// Prepare the html table to be displayed
-				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Update Patient</th><th>Remove Patient</th></tr>";
-				String query = "select * from patient";
+				//payment id is a foreign key. Retrieve payment status from payment table
+				
+				output = "<table border=\"1\"><tr><th>Patient Name</th><th>Patient Address</th><th>Patient Age</th><th>Patient Email</th><th>Patient Phone</th><th>Patient NIC</th><th>Patient Condition</th><th>Payment Status</th><th>Update Patient</th><th>Remove Patient</th></tr>";
+				String query = "select p.patientID,p.patientName,p.patientAddress,p.patientAge,p.patientEmail,p.patientPhone,p.patientNIC,p.patientCondition,pay.status from patient p LEFT JOIN paymentdetails pay ON p.patientID=pay.id";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				// iterate through the rows in the result set
@@ -76,6 +80,8 @@ public class Patient {
 					String patientEmail = rs.getString("patientEmail");
 					String patientPhone = Integer.toString(rs.getInt("patientPhone"));
 					String patientNIC = rs.getString("patientNIC");
+					String patientcondition = rs.getString("patientCondition");
+					String paymentstatus = rs.getString("status");
 					// Add into the html table
 					output += "<tr><td>" + patientName + "</td>";
 					output += "<td>" + patientAddress + "</td>";
@@ -83,6 +89,8 @@ public class Patient {
 					output += "<td>" + patientEmail + "</td>";
 					output += "<td>" + patientPhone + "</td>";
 					output += "<td>" + patientNIC + "</td>";
+					output += "<td>" + patientcondition + "</td>";
+					output += "<td>" + paymentstatus + "</td>";
 					// buttons
 					output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update Patient\" class=\"btn btn-secondary\"></td>"
 							+ "<td><form method=\"post\" action=\"patients.jsp\">"
@@ -104,9 +112,8 @@ public class Patient {
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
-				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for updating.";
+					return "Error while connecting to the database for updating patient details.";
 				}
 				// create a prepared statement
 				String query = "UPDATE patient SET patientName=?,patientAddress=?,patientAge=?,patientEmail=?,patientPhone=?,patientNIC=? WHERE patientID=?";
@@ -130,15 +137,53 @@ public class Patient {
 			}
 			return output;
 		}
+		
+		//Update payment Condition 
+		// update
+
+		public String updatePaymentStatus(String id, String status) {
+			String output = "";
+
+			try {
+				DB_Connection obj_DB_Connection= new DB_Connection();
+				Connection con = obj_DB_Connection.connect();
+
+				if (con == null) {
+					return "Error while connecting to the database for updating.";
+				}
+
+				// create a prepared statement
+				String query = "UPDATE paymentdetails SET status=? WHERE id=?";
+
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+
+				// binding values patient table
+				
+				preparedStmt.setString(1, status);
+				preparedStmt.setInt(2, Integer.parseInt(id));
+			
+				
+				// execute the statement 
+				preparedStmt.execute(); 
+				con.close();
+
+				output = "Updated Payment Status successfully";
+			} catch (Exception e) {
+				output = "Error while updating the Payment Status.";
+				System.err.println(e.getMessage());
+			}
+
+			return output;
+		}
+		
 
 		public String deletePatient(String pID) {
 			String output = "";
 			try {
 				DB_Connection DB = new DB_Connection();
 				Connection con = DB.connect();
-				//Connection con = connect();
 				if (con == null) {
-					return "Error while connecting to the database for deleting.";
+					return "Error while connecting to the database for deleting patient details.";
 				}
 				// create a prepared statement
 				String query = "delete from patient where patientID=?";

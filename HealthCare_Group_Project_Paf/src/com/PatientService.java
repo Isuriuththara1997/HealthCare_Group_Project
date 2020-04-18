@@ -59,6 +59,27 @@ public class PatientService {
 			String output = patientObj.updatePatient(patientID, patientName, patientAddress, patientAge, patientEmail, patientPhone,patientNIC);
 			return output;
 		}
+		
+		//Payment Condition update
+
+		@PUT
+		@Path("/payment")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		public String updatePatientCondition(String paymentData) {
+			// Convert the input string to a JSON object
+			JsonObject doctorObject = new JsonParser().parse(paymentData).getAsJsonObject();
+
+			// Read the values from the JSON object
+			String id = doctorObject.get("id").getAsString();
+			String status = doctorObject.get("status").getAsString();
+		
+
+			String output =  patientObj.updatePaymentStatus(id,status);
+
+			return output;
+		}
+		
 
 		@DELETE
 		@Path("/")

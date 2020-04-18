@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <plugins>
+  	<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>

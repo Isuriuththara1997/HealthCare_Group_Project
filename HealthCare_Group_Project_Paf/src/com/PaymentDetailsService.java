@@ -43,10 +43,10 @@ public class PaymentDetailsService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertPaymentDetails(@FormParam("appno") String appno, @FormParam("cardType") String cardType,
-			@FormParam("nameOnCard") String nameOnCard, @FormParam("address") String address,
+			@FormParam("nameOnCard") String nameOnCard, @FormParam("cardno") String cardno,
 			@FormParam("phone") String phone, @FormParam("expdate") String expdate, @FormParam("amount") String amount,
 			@FormParam("status") String status) {
-		String output = PayObj.insertPaymentDetails(appno, cardType, nameOnCard, address, phone, expdate, amount,
+		String output = PayObj.insertPaymentDetails(appno, cardType, nameOnCard, cardno, phone, expdate, amount,
 				status);
 		return output;
 	}
@@ -66,13 +66,13 @@ public class PaymentDetailsService {
 		String appno = PaymentObj.get("appno").getAsString();
 		String cardType = PaymentObj.get("cardType").getAsString();
 		String nameOnCard = PaymentObj.get("nameOnCard").getAsString();
-		String address = PaymentObj.get("address").getAsString();
+		String cardno = PaymentObj.get("cardno").getAsString();
 		String phone = PaymentObj.get("phone").getAsString();
 		String expdate = PaymentObj.get("expdate").getAsString();
 		String amount = PaymentObj.get("amount").getAsString();
 		String status = PaymentObj.get("status").getAsString();
 
-		String output = PayObj.updatePaymentDetails(id, appno, cardType, nameOnCard, address, phone, expdate, amount,
+		String output = PayObj.updatePaymentDetails(id, appno, cardType, nameOnCard, cardno, phone, expdate, amount,
 				status);
 		return output;
 	}

@@ -20,7 +20,7 @@ public class Stock {
 			{ return "Error while connecting to the database for inserting.";}
 			
 			// create a prepared statement
-			String query = " insert into Stock ('id','sname','quantity','expDate','recDate')" + " values (?,?,?,?,?)";
+			String query = " insert into stock ('id','sname','quantity','expDate','recDate')" + " values (?,?,?,?,?)";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			// binding values
 			
@@ -50,7 +50,7 @@ public class Stock {
 			{ return "Error while connecting to the database for reading."; }
             // Prepare the html table to be displayed
 			output = "<table border=\"1\"><tr><th>Stock Id</th><th>Stock Name</th><th>Quantity</th><th>Expiry Date</th><th>Received Date</th></tr>";
-			String query = "select * from Stock";
+			String query = "select * from stock";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 // iterate through the rows in the result set
@@ -90,7 +90,7 @@ public class Stock {
 			if (con == null) 
 			{ return "Error while connecting to the database for updating."; }
 // create a prepared statement
-			String query = "UPDATE Stock SET sname=?, quantity=?, expDate=?, recDate=? WHERE id=?";
+			String query = "UPDATE stock SET sname=?, quantity=?, expDate=?, recDate=? WHERE id=?";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 // binding values
 			preparedStmt.setString(1, id);
@@ -120,7 +120,7 @@ public class Stock {
 			if (con == null) 
 			{ return "Error while connecting to the database for deleting."; }
 // create a prepared statement
-			String query = "delete from Stock where id=?";
+			String query = "delete from stock where id=?";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 // binding values
 			preparedStmt.setInt(1, Integer.parseInt(id));

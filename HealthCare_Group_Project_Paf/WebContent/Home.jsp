@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h>Health care</h>
+<h1>Health care</h1>
 
 <p><a href= "HealthCare/Patients">Patient</a>
 
 <p><a href= "HealthCare/doctor">Doctor</a>
+
+<p><a href= "HealthCare/Appointments">Appointments</a>
 
 <p><a href= "HealthCare/Payments">Payments</a>
 

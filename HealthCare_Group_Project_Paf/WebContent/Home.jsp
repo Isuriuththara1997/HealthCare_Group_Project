@@ -13,8 +13,6 @@
 
 <p><a href= "HealthCare/doctor">Doctor</a>
 
-<p><a href= "HealthCare/Appointments">Appointments</a>
-
 <p><a href= "HealthCare/Payments">Payments</a>
 
 

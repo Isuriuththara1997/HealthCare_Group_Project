@@ -1,20 +1,31 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import Util.DB_Connection;
+import java.sql.*;
+
 public class Nurse {
 	
+	 //A common method to connect to the DB
+		private Connection connect()
+			{
+				Connection con = null;
+				try
+			{
+				Class.forName("com.mysql.jdbc.Driver");
+		
+			//Provide the correct details: DBServer/DBName, username, password
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hospitalmanagement", "root", "root");
+			}
+				catch (Exception e)
+				{e.printStackTrace();}
+				return con;
+			}
+		
 		public String insertNurse(String id, String name, String age, String tele, String ward)
 		{
 			String output = "";
 				try
 				{
-					DB_Connection dbconnection = new DB_Connection();
-					Connection con = dbconnection.connect();
+					Connection con = connect();
 					if (con == null)
 					{return "Error while connecting to the database for inserting."; }
 		
@@ -51,15 +62,14 @@ public class Nurse {
 			
 			try
 			{
-				DB_Connection dbconnection = new DB_Connection();
-				Connection con = dbconnection.connect();
+				Connection con = connect();
 				if (con == null)
 				{return "Error while connecting to the database for reading."; }
 		
 				// Prepare the html table to be displayed
-				output = "<table border=\"1\"><tr><th>NurseID</th><th>NurseName</th><th>NurseAge</th><th>NurseTelePhone</th><th>NurseWard</th><th>Update</th><th>Remove</th></tr>";
+				output = "<table border=\"1\"><tr><th>NurseID</th><th>NurseName</th><th>NurseAge</th><th>NurseTelePhone</th><th>NurseWard</th><th>Patient Name</th><th>Patient Telephone</th><th>Stock ID</th><th>Stock Name</th></tr>";
 						
-					String query = "select * from Nurse";
+					String query = "select n.nurse_id, n.nurse_name, n.nurse_age, n.nurse_tele, n.nurse_ward, p.patientName, p.patientPhone, s.sname, s.quantity from nurse n , stock s, patient p where n.nurse_id = s.nurseID AND  n.nurse_id = p.nurseId";
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery(query);
 						
@@ -71,6 +81,10 @@ public class Nurse {
 						String nurse_age = Integer.toString(rs.getInt("nurse_age"));
 						String nurse_tele = Integer.toString(rs.getInt("nurse_tele"));
 						String nurse_ward = rs.getString("nurse_ward");
+						String patientName = rs.getString("patientName");
+						String patientPhone = Integer.toString(rs.getInt("patientPhone"));
+						String stockname = rs.getString("sname");
+						String stockQuantity = rs.getString("quantity");
 		
 						// Add into the html table
 						output += "<tr><td>" + nurse_id + "</td>";
@@ -78,13 +92,12 @@ public class Nurse {
 						output += "<td>" + nurse_age + "</td>";
 						output += "<td>" + nurse_tele + "</td>";
 						output += "<td>" + nurse_ward + "</td>";
+						output += "<td>" + patientName + "</td>";
+						output += "<td>" + patientPhone + "</td>";
+						output += "<td>" + stockname + "</td>";
+						output += "<td>" + stockQuantity + "</td>";
 		
-						// buttons
-						output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\"btn btn-secondary\"></td>"
-								+ "<td><form method=\"post\" action=\"items.jsp\">" 
-								+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-								+ "<input name=\"nurse_id\" type=\"hidden\" value=\"" + nurse_id
-								+ "\">" + "</form></td></tr>";
+						
 					}
 		
 					con.close();
@@ -108,8 +121,7 @@ public class Nurse {
 		
 			try
 			{
-				DB_Connection dbconnection = new DB_Connection();
-				Connection con = dbconnection.connect();
+				Connection con = connect();
 				if (con == null)
 				{return "Error while connecting to the database for updating."; }
 				// create a prepared statement
@@ -149,8 +161,7 @@ public class Nurse {
 		
 			try
 			{
-				DB_Connection dbconnection = new DB_Connection();
-				Connection con = dbconnection.connect();
+				Connection con = connect();
 				if (con == null)
 				{return "Error while connecting to the database for deleting."; }
 		
@@ -176,3 +187,5 @@ public class Nurse {
 		}
 		
 }
+
+
